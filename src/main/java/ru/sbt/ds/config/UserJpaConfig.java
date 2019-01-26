@@ -1,6 +1,5 @@
 package ru.sbt.ds.config;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,14 +7,13 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import ru.sbt.ds.entity.User;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.io.IOException;
-import java.sql.SQLException;
 
 
 @Configuration
@@ -38,21 +36,21 @@ public class UserJpaConfig {
         return dataSource;
     }
 
+
     @Bean
-    public HibernateTemplate hibernateTemplate() throws IOException, SQLException {
-        return new HibernateTemplate(sessionFactory());
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        em.setDataSource(dataSource());
+        em.setPackagesToScan(new String[] { "ru.sbt.ds.entity" });
+        em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+//        em.setJpaProperties(additionalProperties());
+        return em;
     }
 
     @Bean
-    public SessionFactory sessionFactory() throws IOException, SQLException {
-        return new LocalSessionFactoryBuilder(dataSource())
-                .addAnnotatedClasses(User.class)
-                .buildSessionFactory();
+    JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
+        return transactionManager;
     }
-
-    // configure entityManagerFactory
-
-    // configure transactionManager
-
-    // configure additional Hibernate Properties
 }
