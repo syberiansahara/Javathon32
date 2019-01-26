@@ -1,4 +1,4 @@
-package ru.sbt.ds.config;
+package ru.team32.javathon.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 
 
 @Configuration
-@EnableJpaRepositories(basePackages = "ru.sbt.ds.entity.repository")
+@EnableJpaRepositories(basePackages = "ru.team32.javathon.entity.repository")
 @PropertySource("persistence-user.properties")
 @EnableTransactionManagement
 public class UserJpaConfig {
@@ -41,7 +41,7 @@ public class UserJpaConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[] { "ru.sbt.ds.entity" });
+        em.setPackagesToScan(new String[] { "ru.team32.javathon.entity" });
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 //        em.setJpaProperties(additionalProperties());
         return em;

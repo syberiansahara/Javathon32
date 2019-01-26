@@ -1,4 +1,4 @@
-package ru.sbt.ds.entity;
+package ru.team32.javathon.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

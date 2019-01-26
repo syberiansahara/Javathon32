@@ -1,8 +1,8 @@
-package ru.sbt.ds.service;
+package ru.team32.javathon.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.sbt.ds.dao.ITextDAO;
+import ru.team32.javathon.dao.ITextDAO;
 
 @Service
 public class TextService implements ITextService {

@@ -1,4 +1,4 @@
-package ru.sbt.ds.dao;
+package ru.team32.javathon.dao;
 
 import org.springframework.stereotype.Repository;
 

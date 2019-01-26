@@ -3,9 +3,9 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import ru.sbt.ds.config.UserJpaConfig;
-import ru.sbt.ds.entity.User;
-import ru.sbt.ds.entity.repository.UserRepository;
+import ru.team32.javathon.config.UserJpaConfig;
+import ru.team32.javathon.entity.User;
+import ru.team32.javathon.entity.repository.UserRepository;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;

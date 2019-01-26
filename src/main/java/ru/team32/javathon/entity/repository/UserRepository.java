@@ -1,7 +1,7 @@
-package ru.sbt.ds.entity.repository;
+package ru.team32.javathon.entity.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.sbt.ds.entity.User;
+import ru.team32.javathon.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 }
