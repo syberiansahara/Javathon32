@@ -16,8 +16,9 @@ public class TextController {
     private ITextService textService;
 
     @PostMapping(value="/postText")
+    //http://localhost:8888/text/postText
     public ResponseEntity<?> updateRanksInQueue(@RequestBody String rawText) {
 
-        return new ResponseEntity<>("WOW RESULT", HttpStatus.OK);
+        return new ResponseEntity<>(rawText.substring(0, Integer.min(5, rawText.length() - 1)), HttpStatus.OK);
     }
 }
