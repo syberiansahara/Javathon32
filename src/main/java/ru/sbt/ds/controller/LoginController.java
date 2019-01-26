@@ -1,4 +1,4 @@
-package ru.sbt.ds;
+package ru.sbt.ds.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
