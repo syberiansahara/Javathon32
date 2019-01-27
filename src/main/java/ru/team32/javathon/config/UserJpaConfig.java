@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.Properties;
 
 
 @Configuration
@@ -43,7 +44,7 @@ public class UserJpaConfig {
         em.setDataSource(dataSource());
         em.setPackagesToScan(new String[] { "ru.team32.javathon.entity" });
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-//        em.setJpaProperties(additionalProperties());
+        em.setJpaProperties(additionalProperties());
         return em;
     }
 
@@ -52,5 +53,18 @@ public class UserJpaConfig {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory);
         return transactionManager;
+    }
+
+
+    final Properties additionalProperties() {
+        final Properties hibernateProperties = new Properties();
+
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+        hibernateProperties.setProperty("hibernate.cache.use_second_level_cache", env.getProperty("hibernate.cache.use_second_level_cache"));
+        hibernateProperties.setProperty("hibernate.cache.use_query_cache", env.getProperty("hibernate.cache.use_query_cache"));
+
+        return hibernateProperties;
     }
 }
