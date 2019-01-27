@@ -18,10 +18,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
-@Configuration
-@EnableJpaRepositories(basePackages = "ru.sbt.ds.entity.repository")
-@PropertySource("persistence-user.properties")
-@EnableTransactionManagement
+//@Configuration
+//@EnableJpaRepositories(basePackages = "ru.sbt.ds.entity.repository")
+//@PropertySource("persistence-user.properties")
+//@EnableTransactionManagement
 public class UserJpaConfig {
 
     @Autowired
