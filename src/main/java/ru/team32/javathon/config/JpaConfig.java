@@ -10,18 +10,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import ru.team32.javathon.entity.User;
+import ru.team32.javathon.entity.Theme;
 
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Properties;
 
 
 @Configuration
@@ -52,7 +46,7 @@ public class JpaConfig {
     @Bean
     public SessionFactory sessionFactory() throws IOException, SQLException {
         return new LocalSessionFactoryBuilder(dataSource())
-                .addAnnotatedClasses(User.class)
+                .addAnnotatedClasses(Theme.class)
                 .buildSessionFactory();
     }
 }

@@ -1,6 +1,6 @@
 dbc.driverClassName=org.postgresql.Driver
 jdbc.url=jdbc:postgresql://localhost:3333/db32
-jdbc.user=user32
+jdbc.theme=user32
 jdbc.pass=pass32
 
 hibernate.dialect=org.hibernate.dialect.PostgreSQL94Dialect

@@ -12,4 +12,9 @@ public class TextService implements ITextService {
     public void parseText(String rawText) {
 
     }
+
+    @Override
+    public void selectTheme() {
+        textDAO.getSomething();
+    }
 }

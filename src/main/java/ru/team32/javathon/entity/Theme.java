@@ -4,16 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class Theme {
 
     @Id
     private long id;
 
-    private String name;
+    private String theme;
 
-    public User(long id, String name) {
+    public Theme(long id, String theme) {
         this.id = id;
-        this.name = name;
+        this.theme = theme;
     }
 
     public long getId() {
@@ -24,11 +24,11 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTheme() {
+        return theme;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTheme(String theme) {
+        this.theme = theme;
     }
 }
