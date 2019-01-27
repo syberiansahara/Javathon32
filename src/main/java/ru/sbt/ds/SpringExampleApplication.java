@@ -7,6 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //http://localhost:8888/index.html
 public class SpringExampleApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SpringExampleApplication.class, args);
+        SpringApplication.run(SpringExampleApplication.class, args);  
     }
 }

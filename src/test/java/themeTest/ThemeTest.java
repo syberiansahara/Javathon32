@@ -1,3 +1,4 @@
+package themeTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.SpringApplication;
@@ -19,10 +20,10 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-        classes = { ThemeJpaConfig.class},
+        classes = { UserJpaConfig.class, ThemeJpaConfig.class},
         loader = AnnotationConfigContextLoader.class)
 @Transactional
-public class UserTest {
+public class ThemeTest {
 
     @Resource
     private UserRepository userRepository;
