@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-        classes = { UserJpaConfig.class, ThemeJpaConfig.class},
+        classes = { ThemeJpaConfig.class},
         loader = AnnotationConfigContextLoader.class)
 @Transactional
 public class ThemeTest {
