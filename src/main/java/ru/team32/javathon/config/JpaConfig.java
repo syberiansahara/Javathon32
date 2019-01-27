@@ -1,5 +1,6 @@
 package ru.team32.javathon.config;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,13 +8,19 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import ru.team32.javathon.entity.User;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import javax.validation.constraints.NotNull;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Properties;
 
 
@@ -21,7 +28,7 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "ru.team32.javathon.entity.repository")
 @PropertySource("persistence-user.properties")
 @EnableTransactionManagement
-public class UserJpaConfig {
+public class JpaConfig {
 
     @Autowired
     private Environment env;
@@ -37,34 +44,15 @@ public class UserJpaConfig {
         return dataSource;
     }
 
-
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[] { "ru.team32.javathon.entity" });
-        em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        em.setJpaProperties(additionalProperties());
-        return em;
+    public HibernateTemplate hibernateTemplate() throws IOException, SQLException {
+        return new HibernateTemplate(sessionFactory());
     }
 
     @Bean
-    JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory);
-        return transactionManager;
-    }
-
-
-    final Properties additionalProperties() {
-        final Properties hibernateProperties = new Properties();
-
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-        hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-        hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-        hibernateProperties.setProperty("hibernate.cache.use_second_level_cache", env.getProperty("hibernate.cache.use_second_level_cache"));
-        hibernateProperties.setProperty("hibernate.cache.use_query_cache", env.getProperty("hibernate.cache.use_query_cache"));
-
-        return hibernateProperties;
+    public SessionFactory sessionFactory() throws IOException, SQLException {
+        return new LocalSessionFactoryBuilder(dataSource())
+                .addAnnotatedClasses(User.class)
+                .buildSessionFactory();
     }
 }

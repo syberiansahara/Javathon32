@@ -3,7 +3,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import ru.team32.javathon.config.UserJpaConfig;
+import ru.team32.javathon.config.JpaConfig;
 import ru.team32.javathon.entity.User;
 import ru.team32.javathon.entity.repository.UserRepository;
 
@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-        classes = { UserJpaConfig.class },
+        classes = { JpaConfig.class },
         loader = AnnotationConfigContextLoader.class)
 @Transactional
 public class UserTest {
