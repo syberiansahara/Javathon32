@@ -1,13 +1,10 @@
-package ru.sbt.ds.controller;
+package ru.team32.javathon.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import ru.sbt.ds.service.ITextService;
+import org.springframework.web.bind.annotation.*;
+import ru.team32.javathon.service.ITextService;
 
 @RestController
 @RequestMapping("/text")
@@ -20,5 +17,12 @@ public class TextController {
     public ResponseEntity<?> updateRanksInQueue(@RequestBody String rawText) {
 
         return new ResponseEntity<>(rawText.substring(0, Integer.min(5, rawText.length() - 1)), HttpStatus.OK);
+    }
+
+    @GetMapping(value="/getTheme")
+    //http://localhost:8888/text/postText
+    public ResponseEntity<?> getTheme() {
+        textService.selectTheme();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

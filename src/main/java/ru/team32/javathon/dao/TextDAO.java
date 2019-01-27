@@ -15,6 +15,6 @@ public class TextDAO implements ITextDAO {
 
     @Override
     public void getSomething() {
-        System.out.println(hibernateTemplate.get(Theme.class, 1L));
+        System.out.println(hibernateTemplate.get(Theme.class, 1L).toString());
     }
 }
